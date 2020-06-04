@@ -17,6 +17,7 @@
 		DEAD SPOT
 	</span>
 </p>
+<input type="text" v-on:keyup.enter.space="alertMe">
 </div>
 
 <script>
@@ -35,9 +36,11 @@
 		updateCoordinates: function(event){
 			this.x = event.clientX;
 			this.y = event.clientY;
+		},
+		alertMe: function(){
+			alert('Alert!');
 		}
-	},
-
+	}
 })
 </script>
 </body>
