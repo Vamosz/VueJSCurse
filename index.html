@@ -12,6 +12,8 @@
 	<h1 v-once> {{ title }}</h1>
 	<p>{{ sayHello() }}</p>
 	<a v-bind:href="link">Google</a>
+	<hr>
+	<p v-html="finishedLink"></p>
 </div>
 
 <script>
@@ -19,7 +21,8 @@
 	el: '#app',
 	data: {
 		title: 'Hello World!',
-		link: 'https://www.google.com'
+		link: 'https://www.google.com',
+		finishedLink: '<a href="http://google.com">Google</a>'
 	},
 	methods: {
 		sayHello: function(){
