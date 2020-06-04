@@ -9,6 +9,7 @@
 <script src="https://unpkg.com/vue/dist/vue.js"></script>
 
 <div id="app">
+	<h1 v-once> {{ title }}</h1>
 	<p>{{ sayHello() }}</p>
 	<a v-bind:href="link">Google</a>
 </div>
@@ -22,6 +23,7 @@
 	},
 	methods: {
 		sayHello: function(){
+			this.title = 'Helo!';
 			return this.title;
 		}
 	},
