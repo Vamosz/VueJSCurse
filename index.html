@@ -9,17 +9,32 @@
 <script src="https://unpkg.com/vue/dist/vue.js"></script>
 
 <div id="app">
-<input type="text" v-model="name">
-<p>{{ name }}</p>
+<button v-on:click="counter++"> Increase </button>
+<button v-on:click="counter--"> Decrease </button>
+<button v-on:click="secondCounter++"> Increase Sec </button>
+<p> Counter: {{counter}} / {{secondCounter}} </p>
+<p>Result: {{ result() }} / {{output}}</p>
 </div>
 
 <script>
 	new Vue({
 	el: '#app',
 	data: {
-		name: 'Patrik'
-		
-	}
+		counter: 0,
+		secondCounter: 0
+	},
+	computed: {
+		//AZ output nem fog lefutni a secondCounter++ fv hívásnál
+		output: function(){
+			return this.counter > 5 ? 'Greater 5' :'Sm. 5';
+		}
+	},
+	methods: {
+		//A result le fog futni a secondCounter++ fv hívásnál is
+		result: function(){
+			return this.counter > 5 ? 'Greater 5' :'Sm. 5';
+		}
+	},
 })
 </script>
 </body>
