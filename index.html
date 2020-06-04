@@ -9,9 +9,10 @@
 <script src="https://unpkg.com/vue/dist/vue.js"></script>
 
 <div id="app">
-<button v-on:click="counter++"> Increase </button>
-<button v-on:click="counter--"> Decrease </button>
-<button v-on:click="secondCounter++"> Increase Sec </button>
+<button @click="counter++"> Increase </button>
+<button @click="counter--"> Decrease </button>
+<button @click="secondCounter++"> Increase Sec </button>
+<a :href="google">Google</a>
 <p> Counter: {{counter}} / {{secondCounter}} </p>
 <p>Result: {{ result() }} / {{output}}</p>
 </div>
@@ -21,7 +22,8 @@
 	el: '#app',
 	data: {
 		counter: 0,
-		secondCounter: 0
+		secondCounter: 0,
+		google: 'https://google.com'
 	},
 	computed: {
 		//AZ output nem fog lefutni a secondCounter++ fv hívásnál
