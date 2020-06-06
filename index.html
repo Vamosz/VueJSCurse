@@ -9,15 +9,12 @@
 <script src="https://unpkg.com/vue/dist/vue.js"></script>
 
 <div id="app">
-	<button v-on:click="increase(2, $event)"> Click me</button>
-	<p>{{ counter }}</p>
-	<p v-on:mousemove="updateCoordinates">
-		 Coordinates: {{ x }} / {{ y }} 
-	<span v-on:mousemove.stop="">
-		DEAD SPOT
-	</span>
-</p>
-<input type="text" v-on:keyup.enter.space="alertMe">
+<button @click="counter++"> Increase </button>
+<button @click="counter--"> Decrease </button>
+<button @click="secondCounter++"> Increase Sec </button>
+<a :href="google">Google</a>
+<p> Counter: {{counter}} / {{secondCounter}} </p>
+<p>Result: {{ result() }} / {{output}}</p>
 </div>
 
 <script>
@@ -25,22 +22,29 @@
 	el: '#app',
 	data: {
 		counter: 0,
-		x: 0,
-		y: 0
-		
+		secondCounter: 0,
+		google: 'https://google.com'
+	},
+	computed: {
+		//AZ output nem fog lefutni a secondCounter++ fv hívásnál
+		output: function(){
+			return this.counter > 5 ? 'Greater 5' :'Sm. 5';
+		}
 	},
 	methods: {
-		increase: function(step,event){
-			this.counter += step;
-		},
-		updateCoordinates: function(event){
-			this.x = event.clientX;
-			this.y = event.clientY;
-		},
-		alertMe: function(){
-			alert('Alert!');
+		//A result le fog futni a secondCounter++ fv hívásnál is
+		result: function(){
+			return this.counter > 5 ? 'Greater 5' :'Sm. 5';
 		}
-	}
+	},
+	watch: {
+		counter: function(value){
+			var vm = this;
+			setTimeout(function(){
+				vm.counter= 0;
+			},2000);
+		}
+	},
 })
 </script>
 </body>
