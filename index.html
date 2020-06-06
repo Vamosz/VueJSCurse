@@ -9,19 +9,39 @@
 	<script src="https://unpkg.com/vue/dist/vue.js"></script>
 
 	<div id="app">
-		<p v-if="show">You can see me!</p>
-		<p v-else>Now you see me!</p>
-		<p>Do you also see me?</p>
-		<button @click="show = !show"> Switch </button>
+		<ul>
+			<li v-for="(ingredient, i) in ingredients">
+				{{ ingredient }} ({{ i }})
+			</li>
+		</ul>
+		<hr>
+		<ul>
+			<li v-for="(person, index) in persons" :key="index">
+				{{person.name}}
+				<div v-for="(value, key, index) in person">
+					{{key}}: {{value}} ({{index}})
+				</span>
+			</li>
+		</ul>
+		<hr>
+		<template v-for="(ingredient, index) in ingredients" :key="index"> 
+			<h1> {{ingredient}} </h1>
+			<p> {{ index }} </p>
+		</template>
+
 	</div>
-	<script>
-		new Vue({
-	el: '#app',
-	data: {
-		show: true
-	}
-})
-	</script>
+<script>
+	new Vue({
+		el: '#app',
+		data:{
+			ingredients: ['meat','fruit','cookies'],
+			persons: [
+				{name: 'Max', age: 27,color: 'red'},
+				{name: 'Anna', age: 'unknown', color: 'blue'}
+			]	
+		}
+	})
+</script>
 </body>
 </html>
 
