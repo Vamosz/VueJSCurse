@@ -1,10 +1,13 @@
 <template>
     <div>
-        <p> A wonderful quote!</p>
+        <slot></slot>
     </div>
 </template>
 
 <script>
+export default{
+
+}
 </script>
 
 <style scoped>
