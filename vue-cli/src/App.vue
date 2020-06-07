@@ -1,16 +1,20 @@
 <template>
-  <div id="container">
+  <div class="container">
     <div class="row">
-      <div class="col-xs-12">
-
+      <div class="col-12">
+        <app-quote></app-quote>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-export default {
-}
+  import Qoute from './components/Quote.vue';
+  export default {
+    components: {
+      appQuote: Qoute
+    }
+  }
 </script>
 
 <style lang="scss">
