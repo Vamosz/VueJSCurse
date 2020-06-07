@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-12">
         <app-quote>
-          <h2>The Qoute</h2>
+          <h2> {{ quoteTitle }}</h2>
           <p>A wonderful quote</p>
         </app-quote>
       </div>
@@ -14,6 +14,11 @@
 <script>
 import Qoute from "./components/Quote.vue";
 export default {
+  data: function(){
+    return{
+      quoteTitle: 'The Qoute'
+    }
+  },
   components: {
     appQuote: Qoute
   }
