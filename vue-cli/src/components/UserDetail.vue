@@ -11,8 +11,9 @@ export default {
     props: {
         name: {
             type:String,
-            required: true,
-            default: 'Max'
+            default: function (){
+                return 'Max'
+            }
         }
     },
     methods: {
