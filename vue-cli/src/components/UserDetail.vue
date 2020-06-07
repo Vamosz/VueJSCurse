@@ -9,7 +9,11 @@
 <script>
 export default {
     props: {
-        name: [String, Array]
+        name: {
+            type:String,
+            required: true,
+            default: 'Max'
+        }
     },
     methods: {
         switchName(){
