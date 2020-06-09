@@ -54,7 +54,7 @@
         <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 from-group">
           <label for="priority">Priority</label>
           <select id="priority" class="form-control" v-model="selectedPriority">
-            <option v-for="(item, index) in priorities" :key="index" :selected="item == 'Medium'" 
+            <option v-for="(item, index) in priorities" :key="index" 
             > {{ item }}</option>
           </select>
         </div>
