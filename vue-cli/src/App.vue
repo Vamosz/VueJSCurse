@@ -15,8 +15,9 @@
       </div>
     </div>
     <hr />
-    <input type="text" class="form-control" v-model="node"> 
-    <br><br>
+    <input type="text" class="form-control" v-model="node" />
+    <br />
+    <br />
     <button class="btn btn-success" @click="fetchData()">Get Data</button>
     <ul class="list-group">
       <li
@@ -38,36 +39,36 @@ export default {
       },
       users: [],
       resource: [],
-      node: 'data'
+      node: "data"
     };
   },
   methods: {
     submit() {
-    //   this.$http.post('data.json', this.user).then(
-    //     response => {
-    //       console.log(response);
-    //     },
-    //     error => {
-    //       console.log(error);
-    //     }
-    //   );
-    //   this.fetchData();
-   // this.resource.save({}, this.user);
-   this.resource.saveAlt(this.user);
+      //   this.$http.post('data.json', this.user).then(
+      //     response => {
+      //       console.log(response);
+      //     },
+      //     error => {
+      //       console.log(error);
+      //     }
+      //   );
+      //   this.fetchData();
+      // this.resource.save({}, this.user);
+      this.resource.saveAlt(this.user);
     },
     fetchData() {
-    this.resource.getData({node: this.node}).then(
-        res => console.log('asd',res)
-    );
+      this.resource
+        .getData({ node: this.node })
+        .then(res => res => console.log("asd", res));
     }
   },
   created() {
-      const customAction = {
-        saveAlt: {method: 'POST', url:'alternative.json'},
-        getData: {method: 'GET'}
-      };
-      this.resource = this.$resource('{node}.json', {}, customAction);
-  },
+    const customAction = {
+      saveAlt: { method: "POST", url: "alternative.json" },
+      getData: { method: "GET" }
+    };
+    this.resource = this.$resource("{node}.json", {}, customAction);
+  }
 };
 </script>
 
