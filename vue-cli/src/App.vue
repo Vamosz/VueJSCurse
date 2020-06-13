@@ -13,7 +13,7 @@
         <h1>Custom Directives</h1>
         <p v-highlight:background.delayed="'red'">Color this</p>
         <p v-highlight="'red'">Color this</p>
-        <p v-local-highlight:background.delayed="'red'">Color this</p>
+        <p v-local-highlight:background.delayed.blink="'red'">Color this</p>
       </div>
     </div>
   </div>
@@ -28,13 +28,30 @@ export default {
         if (binding.modifiers["delayed"]) {
           delay = 3000;
         }
-        setTimeout(() => {
-          if (binding.arg == "background") {
-            el.style.background = binding.value;
-          } else {
-            el.style.color = binding.value;
-          }
-        }, delay);
+        if (binding.modifiers["blink"]) {
+          let mainColor = binding.value;
+          let secondColor = "blue";
+          let currentColor = mainColor;
+          setTimeout(() => {
+            setInterval(() => {
+              currentColor =
+                currentColor == secondColor ? mainColor : secondColor;
+              if (binding.arg == "background") {
+                el.style.background = currentColor;
+              } else {
+                el.style.color = currentColor;
+              }
+            }, 1000);
+          }, delay);
+        } else {
+          setTimeout(() => {
+            if (binding.arg == "background") {
+              el.style.background = binding.value;
+            } else {
+              el.style.color = binding.value;
+            }
+          }, delay);
+        }
       }
     }
   }
