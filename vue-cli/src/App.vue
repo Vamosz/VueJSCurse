@@ -15,6 +15,8 @@
       </div>
     </div>
     <hr />
+    <input type="text" class="form-control" v-model="node"> 
+    <br><br>
     <button class="btn btn-success" @click="fetchData()">Get Data</button>
     <ul class="list-group">
       <li
@@ -35,7 +37,8 @@ export default {
         email: ""
       },
       users: [],
-      resource: []
+      resource: [],
+      node: 'data'
     };
   },
   methods: {
@@ -53,25 +56,17 @@ export default {
    this.resource.saveAlt(this.user);
     },
     fetchData() {
-      this.$http
-        .get('data.json')
-        .then(res => {
-          return res.json();
-        })
-        .then(data => {
-          const arr = [];
-          for (let key in data) {
-            arr.push(data[key]);
-          }
-          this.users = arr;
-        });
+    this.resource.getData({node: this.node}).then(
+        res => console.log('asd',res)
+    );
     }
   },
   created() {
       const customAction = {
-        saveAlt: {method: 'POST', url:'alternative.json'}
+        saveAlt: {method: 'POST', url:'alternative.json'},
+        getData: {method: 'GET'}
       };
-      this.resource = this.$resource('data.json', {}, customAction);
+      this.resource = this.$resource('{node}.json', {}, customAction);
   },
 };
 </script>
