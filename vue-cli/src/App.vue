@@ -34,24 +34,27 @@ export default {
         userName: "",
         email: ""
       },
-      users: []
+      users: [],
+      resource: []
     };
   },
   methods: {
     submit() {
-      this.$http.post("", this.user).then(
-        response => {
-          console.log(response);
-        },
-        error => {
-          console.log(error);
-        }
-      );
-      this.fetchData();
+    //   this.$http.post('data.json', this.user).then(
+    //     response => {
+    //       console.log(response);
+    //     },
+    //     error => {
+    //       console.log(error);
+    //     }
+    //   );
+    //   this.fetchData();
+   // this.resource.save({}, this.user);
+   this.resource.saveAlt(this.user);
     },
     fetchData() {
       this.$http
-        .get("")
+        .get('data.json')
         .then(res => {
           return res.json();
         })
@@ -63,7 +66,13 @@ export default {
           this.users = arr;
         });
     }
-  }
+  },
+  created() {
+      const customAction = {
+        saveAlt: {method: 'POST', url:'alternative.json'}
+      };
+      this.resource = this.$resource('data.json', {}, customAction);
+  },
 };
 </script>
 
