@@ -9,53 +9,61 @@
         </div>
         <div class="form-group">
           <label for>Username</label>
-          <input type="email" class="form-control" v-model="user.email"/>
+          <input type="email" class="form-control" v-model="user.email" />
         </div>
-        <button class="btn btn-primary" @click="submit()"> Submit </button>
+        <button class="btn btn-primary" @click="submit()">Submit</button>
       </div>
     </div>
-    <hr>
+    <hr />
     <button class="btn btn-success" @click="fetchData()">Get Data</button>
     <ul class="list-group">
-        <li class="list-group-item" v-for="(item, index) in users" :key="index"> {{item.userName}} - {{item.email}}</li>
+      <li
+        class="list-group-item"
+        v-for="(item, index) in users"
+        :key="index"
+      >{{item.userName}} - {{item.email}}</li>
     </ul>
   </div>
 </template>
 
 <script>
 export default {
-    data: function() {
-        return {
-            user:{
-                userName: '',
-                email: ''
-            },
-            users:[]
-        }
-    },
-    methods: {
-        submit(){
-            this.$http.post('', this.user)
-                .then(response => {
-                    console.log(response);
-                }, error=>{
-                    console.log(error);
-                });
-                this.fetchData();
+  data: function() {
+    return {
+      user: {
+        userName: "",
+        email: ""
+      },
+      users: []
+    };
+  },
+  methods: {
+    submit() {
+      this.$http.post("", this.user).then(
+        response => {
+          console.log(response);
         },
-        fetchData(){
-            this.$http.get('').then(res=>{
-               return res.json();
-                
-            }).then(data => {
-                const arr = [];
-                for(let key in data){
-                    arr.push(data[key]);
-                }
-                this.users = arr;
-            });
+        error => {
+          console.log(error);
         }
+      );
+      this.fetchData();
     },
+    fetchData() {
+      this.$http
+        .get("")
+        .then(res => {
+          return res.json();
+        })
+        .then(data => {
+          const arr = [];
+          for (let key in data) {
+            arr.push(data[key]);
+          }
+          this.users = arr;
+        });
+    }
+  }
 };
 </script>
 
