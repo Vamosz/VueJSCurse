@@ -59,7 +59,7 @@ export default {
     fetchData() {
       this.resource
         .getData({ node: this.node })
-        .then(res => res => console.log("asd", res));
+        .then(res => console.log("asd", res.json()));
     }
   },
   created() {
