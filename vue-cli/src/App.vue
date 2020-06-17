@@ -16,6 +16,11 @@
         <transition name="fade" appear>
           <div class="alert alert-info" v-if="show">Some info</div>
         </transition>
+        <transition appear
+                    enter-active-class="animate__animated animate__bounce"
+                    leave-active-class="animate__animated animate__tada">
+          <div class="alert alert-info" v-if="show">Some info</div>
+        </transition>
       </div>
     </div>
   </div>
@@ -49,9 +54,10 @@
     transition: opacity 1s;
     opacity: 0;
   }
+
   .slide-enter {
     opacity: 0;
-      /*transform: translateY(20px);*/
+    /*transform: translateY(20px);*/
   }
 
   .slide-enter-active {
@@ -70,18 +76,19 @@
   }
 
   @keyframes slide-in {
-    from{
+    from {
       transform: translateY(20px);
     }
-    to{
+    to {
       transform: translateY(0);
     }
   }
+
   @keyframes slide-out {
-    from{
+    from {
       transform: translateY(0);
     }
-    to{
+    to {
       transform: translateY(20px);
 
     }
