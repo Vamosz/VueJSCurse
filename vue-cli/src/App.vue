@@ -45,6 +45,20 @@
                     @leave-cancelled="leaveCancelled">
           <div style="width: 100px; height: 100px; background: lightgreen" v-if="load"></div>
         </transition>
+        <hr>
+        <button class="btn btn-primary" @click="addItem">Add</button>
+        <br>
+        <br>
+        <ul class="list-group">
+          <transition-group name="slide">
+            <li class="list-group-item" v-for="(number,index) in numbers"
+                @click="removeItem(index)"
+                :key="number"
+                style="cursor: pointer"
+            >{{number}}
+            </li>
+          </transition-group>
+        </ul>
       </div>
     </div>
   </div>
@@ -56,10 +70,18 @@
       return {
         show: false,
         load: true,
-        alertAnimation: 'fade'
+        alertAnimation: 'fade',
+        numbers: [1, 2, 3, 4, 5]
       }
     },
     methods: {
+      addItem(item) {
+        const pos = Math.floor(Math.random() * this.numbers.length);
+        this.numbers.splice(pos, 0, this.numbers.length + 1);
+      },
+      removeItem(index) {
+        this.numbers.splice(index, 1);
+      },
       beforeEnter(el) {
         console.log('beforeEnter');
       },
@@ -76,14 +98,14 @@
       beforeLeave(el) {
         console.log('beforeLeave');
       },
-      leave(el, done){
+      leave(el, done) {
         console.log('leave');
         done();
       },
-      afterLeave(el){
+      afterLeave(el) {
         console.log('afterLeave');
       },
-      leaveCancelled(el){
+      leaveCancelled(el) {
         console.log('leaveCancelled');
       }
 
@@ -118,7 +140,7 @@
 
   .slide-enter-active {
     animation: slide-in 1s ease-out forwards;
-    transition: opacity .5s;
+    transition: opacity 1s;
   }
 
   .slide-leave {
@@ -129,24 +151,28 @@
     animation: slide-out 1s ease-out forwards;
     transition: opacity 1s;
     opacity: 0;
+    position: absolute;
   }
 
   @keyframes slide-in {
     from {
-      transform: translateY(20px);
+      transform: translateX(-20px);
     }
     to {
-      transform: translateY(0);
+      transform: translateX(0);
     }
   }
 
   @keyframes slide-out {
     from {
-      transform: translateY(0);
+      transform: translateX(0);
     }
     to {
-      transform: translateY(20px);
+      transform: translateX(20px);
 
     }
+  }
+  .slide-move{
+    transition: transform 1s;
   }
 </style>
