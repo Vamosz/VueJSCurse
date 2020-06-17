@@ -27,6 +27,12 @@
                     leave-active-class="animate__animated animate__tada">
           <div class="alert alert-info" v-if="show">Some info</div>
         </transition>
+
+        <transition :name="alertAnimation" mode="out-in">
+          <div class="alert alert-info" v-if="show" key="info">Some info</div>
+          <div class="alert alert-warning" v-else key="warning">Some warning</div>
+        </transition>
+
       </div>
     </div>
   </div>
