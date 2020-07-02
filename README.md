@@ -1,4 +1,4 @@
-# VueJSCurse
-Vue.js curse on Udemy.
+# VueJSCourse
+Vue.js course on Udemy.
 
 You can find all of important sections in differents branchs.
