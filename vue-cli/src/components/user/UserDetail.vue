@@ -9,5 +9,11 @@
     </div>
 </template>
 <script>
-
+export default {
+    beforeRouteEnter(to, from, next){
+        console.log('beforerouteeter');
+        //cannot reach data only in the next method.
+        next();
+    }
+}
 </script>
