@@ -10,9 +10,14 @@
 </template>
 <script>
     export default {
-        data(){
+        data() {
             return {
                 id: this.$route.params.id
+            }
+        },
+        watch: {
+            '$route'(to) {
+                this.id = to.params.id;
             }
         },
         methods: {
