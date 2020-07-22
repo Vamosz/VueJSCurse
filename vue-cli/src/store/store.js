@@ -12,15 +12,34 @@ export const store = new Vuex.Store({
             return state.counter * 2;
         },
         stringCounter: state => {
-            return state.counter+ ' Clicks';
+            return state.counter + " Clicks";
         }
     },
+    //mutations is a sync method so you cant use in async! for that you should use actions!
     mutations: {
-        increment: state => {
-            state.counter ++;
+        increment: (state, payload) => {
+            state.counter += payload;
         },
-        decrement: state => {
-            state.counter--;
+        decrement: (state, payload) => {
+            state.counter -= payload;
+        }
+    },
+    actions: {
+        increment: ({commit}, payload) => {
+            commit("increment", payload);
+        },
+        decrement: ({commit}) => {
+            commit("decrement");
+        },
+        asyncIncrement: ({commit}, payload) => {
+            setTimeout(() => {
+                commit("increment", payload.by);
+            }, payload.duration);
+        },
+        asyncDecrement: ({commit}, payload) => {
+            setTimeout(() => {
+                commit("decrement", payload.by);
+            }, payload.duration);
         }
     }
-})
+});
