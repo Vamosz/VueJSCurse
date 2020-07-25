@@ -7,16 +7,21 @@
                     <input
                             type="email"
                             id="email"
-                            @input="$v.email.touch()"
+                            @change="$v.email.touch()"
                             v-model="email">
-                    <div>{{$v}}</div>
+                    <small style="color:red;" v-if="!$v.email.email">Please provide a valid email address.</small>
+                    <small style="color:red;" v-if="!$v.email.required">This field must not be empty.</small>
                 </div>
-                <div class="input">
+                <div class="input" :class="{invalid: $v.age.$invalid}">
                     <label for="age">Your Age</label>
                     <input
                             type="number"
                             id="age"
+                            @blur="$v.age.touch()"
                             v-model.number="age">
+                    <small style="color:red;" v-if="!$v.age.numeric">Please provide a valid number.</small>
+                    <small style="color:red;" v-if="!$v.age.required">This field must not be empty.</small>
+                    <small style="color:red;" v-if="!$v.age.minVal">This field must be higher than {{ $v.age.$params.minVal.min }}.</small>
                 </div>
                 <div class="input">
                     <label for="password">Password</label>
@@ -71,7 +76,7 @@
 </template>
 
 <script>
-    import {required, email} from 'vuelidate/lib/validators'
+    import {required, email, numeric, minValue, } from 'vuelidate/lib/validators'
 
     export default {
         data() {
@@ -89,6 +94,11 @@
             email: {
                 required,
                 email
+            },
+            age: {
+                required,
+                numeric,
+                minVal: minValue(18)
             }
         },
         methods: {
