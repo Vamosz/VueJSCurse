@@ -2,39 +2,41 @@
     <div id="signup">
         <div class="signup-form">
             <form @submit.prevent="onSubmit">
-                <div class="input" :class="{invalid: $v.email.$invalid}">
+                <div class="input" :class="{invalid: $v.email.$error}">
                     <label for="email">Mail</label>
                     <input
                             type="email"
                             id="email"
-                            @change="$v.email.touch()"
+                            v-model.trim="$v.email.$model"
                             v-model="email">
                     <small style="color:red;" v-if="!$v.email.email">Please provide a valid email address.</small>
                     <small style="color:red;" v-if="!$v.email.required">This field must not be empty.</small>
                 </div>
-                <div class="input" :class="{invalid: $v.age.$invalid}">
+                <div class="input" :class="{invalid: $v.age.$error}">
                     <label for="age">Your Age</label>
                     <input
                             type="number"
                             id="age"
-                            @blur="$v.age.touch()"
+                            v-model.trim="$v.age.$model"
                             v-model.number="age">
                     <small style="color:red;" v-if="!$v.age.numeric">Please provide a valid number.</small>
                     <small style="color:red;" v-if="!$v.age.required">This field must not be empty.</small>
                     <small style="color:red;" v-if="!$v.age.minVal">This field must be higher than {{ $v.age.$params.minVal.min }}.</small>
                 </div>
-                <div class="input">
+                <div class="input" :class="{invalid: $v.password.$error}">
                     <label for="password">Password</label>
                     <input
                             type="password"
                             id="password"
+                            v-model.trim="$v.password.$model"
                             v-model="password">
                 </div>
-                <div class="input">
+                <div class="input" :class="{invalid: $v.confirmPassword.$error}">
                     <label for="confirm-password">Confirm Password</label>
                     <input
                             type="password"
                             id="confirm-password"
+                            v-model.trim="$v.email.$model"
                             v-model="confirmPassword">
                 </div>
                 <div class="input">
@@ -76,7 +78,7 @@
 </template>
 
 <script>
-    import {required, email, numeric, minValue, } from 'vuelidate/lib/validators'
+    import {required, email, numeric, minValue, minLength, sameAs} from 'vuelidate/lib/validators'
 
     export default {
         data() {
@@ -99,6 +101,13 @@
                 required,
                 numeric,
                 minVal: minValue(18)
+            },
+            password: {
+                required,
+                minLen: minLength(6)
+            },
+            confirmPassword: {
+                sameAs: sameAs('password')
             }
         },
         methods: {
