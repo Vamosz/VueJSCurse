@@ -21,7 +21,8 @@
                             v-model.number="age">
                     <small style="color:red;" v-if="!$v.age.numeric">Please provide a valid number.</small>
                     <small style="color:red;" v-if="!$v.age.required">This field must not be empty.</small>
-                    <small style="color:red;" v-if="!$v.age.minVal">This field must be higher than {{ $v.age.$params.minVal.min }}.</small>
+                    <small style="color:red;" v-if="!$v.age.minVal">This field must be higher than {{
+                        $v.age.$params.minVal.min }}.</small>
                 </div>
                 <div class="input" :class="{invalid: $v.password.$error}">
                     <label for="password">Password</label>
@@ -39,7 +40,7 @@
                             v-model.trim="$v.email.$model"
                             v-model="confirmPassword">
                 </div>
-                <div class="input">
+                <div class="input" >
                     <label for="country">Country</label>
                     <select id="country" v-model="country">
                         <option value="usa">USA</option>
@@ -48,11 +49,11 @@
                         <option value="germany">Germany</option>
                     </select>
                 </div>
-                <div class="hobbies">
+                <div class="hobbies" >
                     <h3>Add some Hobbies</h3>
                     <button @click="onAddHobby" type="button">Add Hobby</button>
                     <div class="hobby-list">
-                        <div
+                        <div :class="{invalid: $v.hobbyInputs.$each[index].$invalid}"
                                 class="input"
                                 v-for="(hobbyInput, index) in hobbyInputs"
                                 :key="hobbyInput.id">
@@ -60,13 +61,17 @@
                             <input
                                     type="text"
                                     :id="hobbyInput.id"
+                                    @blur="$v.hobbyInputs.$each[index].value.touch()"
                                     v-model="hobbyInput.value">
                             <button @click="onDeleteHobby(hobbyInput.id)" type="button">X</button>
                         </div>
+                        <small style="color:red;" v-if="!$v.hobbyInputs.required">Kötelező</small>
+                        <small style="color:red;" v-if="!$v.hobbyInputs.minLen">Minimum 2.</small>
                     </div>
                 </div>
                 <div class="input inline">
-                    <input type="checkbox" id="terms" v-model="terms">
+                    <input type="checkbox" id="terms"
+                           v-model="terms">
                     <label for="terms">Accept Terms of Use</label>
                 </div>
                 <div class="submit">
@@ -108,6 +113,16 @@
             },
             confirmPassword: {
                 sameAs: sameAs('password')
+            },
+            hobbyInputs: {
+                required,
+                minLen: minLength(2),
+                $each: {
+                    value:{
+                        required,
+                        minLen: minLength(5)
+                    }
+                }
             }
         },
         methods: {
