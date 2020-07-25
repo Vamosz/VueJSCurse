@@ -102,7 +102,13 @@
                 required,
                 email,
                 unique: val => {
-                    return val !== 'test@test.com'
+                    if(val ==='') return true;
+                    return new Promise((resolve) => {
+                        setTimeout(() => {
+                            resolve(val !== 'test@test.com');
+                        }, 1000)
+
+                    })
                 }
             },
             age: {
