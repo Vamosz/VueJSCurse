@@ -16,22 +16,31 @@
                 </router-link>
             </b-navbar-nav>
             <b-navbar-nav class="ml-auto">
-            <b-nav-item-dropdown right>
+                <b-nav-item>
+                    End day
+                </b-nav-item>
+                <b-nav-item-dropdown right>
             <!-- Using 'button-content' slot -->
             <template v-slot:button-content>
-                <em>End day</em>
+                <em>Save/Load</em>
             </template>
             <b-dropdown-item href="#">Save</b-dropdown-item>
             <b-dropdown-item href="#">Load</b-dropdown-item>
             </b-nav-item-dropdown>
             </b-navbar-nav>
+            <strong class="navbar-text ml-3">Funds: {{funds | currency}}</strong>
         </b-collapse>
     </b-navbar>
 </template>
 
 <script>
     export default {
-        name: "Header"
+        name: "Header",
+        computed:{
+            funds(){
+                return this.$store.getters.funds;
+            }
+        }
     }
 </script>
 
