@@ -23,7 +23,7 @@ const mutations = {
         }else {
             state.stocks.splice(state.stocks.indexOf((record), 1));
         }
-        state.funds += stockPrice*quantity;
+        state.funds += stockPrice * quantity;
     }
 };
 
