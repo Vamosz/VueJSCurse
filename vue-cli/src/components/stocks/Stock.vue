@@ -4,7 +4,7 @@
             <b-card-text>
                 <b-row>
                     <b-col col sm="6"> <input type="number" class="form-control" v-model="quantity"></b-col>
-                    <b-col col sm="6" class="text-right"><b-button variant="outline-success" @click="buyStock">Buy</b-button></b-col>
+                    <b-col col sm="6" class="text-right"><b-button variant="outline-success" @click="buyStock" :disabled="quantity <= 0">Buy</b-button></b-col>
                 </b-row>
 
 
@@ -29,7 +29,7 @@
                     stockPrice: this.stockPrice,
                     quantity: this.quantity
                 }
-                console.log(order);
+                this.$store.dispatch('buyStock', order)
                 this.quantity = 0;
             }
         }
